@@ -73,13 +73,3 @@ class LinkedList:
         while(current):
             print(current.value)
             current = current.next
-
-
-linkedList = LinkedList()
-linkedList.add_to_tail(10)
-linkedList.add_to_tail(20)
-linkedList.add_to_tail(30)
-print(linkedList.remove_head())
-print(linkedList.remove_head())
-# linkedList.add_to_tail(10)
-linkedList.printMe()
