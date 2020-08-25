@@ -18,29 +18,30 @@ class LinkedList:
     def __init__(self):  
         self.head = None
         self.tail = None
+        self.length = 0
 
     # insertion method
     def add_to_tail(self, value):
-        newNode = Node(value)
+        new_node = Node(value)
+        self.length += 1
         if self.head is None and self.tail is None:
-            self.head = newNode
-            self.tail = newNode
-        self.tail.set_next(newNode)
-        self.tail = newNode
+            self.head = new_node
+            self.tail = new_node
+        self.tail.set_next(new_node)
+        self.tail = new_node
+
+    def add_to_head(self, value):
+        self.length += 1
+        if self.head is None:
+            new_node = Node(value)
+            self.head = new_node
+            self.tail = new_node
+        self.head.set_next(new_node)
+        self.head = new_node
 
     # deletion methods
-    def remove_node(self, value):
-        if self.head is None and self.tail is None:
-            return
-        byeNode = self.head
-        while(byeNode):  
-            if byeNode.value == value:  
-                break
-            prev = byeNode  
-            byeNode = byeNode.get_next()
-            prev.next = byeNode.get_next()
-
     def remove_head(self):
+        self.length -= 1
         if self.head is None and self.tail is None:
             return
         if not self.head.get_next():
@@ -53,6 +54,7 @@ class LinkedList:
         return value
             
     def remove_tail(self):
+        self.length -= 1
         if self.head is None and self.tail is None:
             return
         current = self.head
@@ -65,21 +67,35 @@ class LinkedList:
             current = current.get_next()
         value = self.tail.get_value()
         self.tail = current
+        current = None
         return value
 
+    def remove_at_value(self, value):
+        self.length -= 1
+        if self.head is None and self.tail is None:
+            return
+        bye_node = self.head
+        while(bye_node):  
+            if bye_node.value == value:  
+                break
+            prev = bye_node  
+            bye_node = bye_node.get_next()
+            prev.next = bye_node.get_next()
+
+    def remove_at_index(self, index):
+        if index > self.length:
+            return None
+        prev_node = self.head
+        for i in range(index - 1):
+            prev_node = prev_node.get_next()
+        target = prev_node.get_next()
+        prev_node.next = target.next
+        target.next = None
+        self.length -= 1
+
     # print method
-    def printMe(self):
+    def print_list(self):
         current = self.head
         while(current):
             print(current.value)
             current = current.next
-
-
-linkedList = LinkedList()
-linkedList.add_to_tail(10)
-linkedList.add_to_tail(20)
-linkedList.add_to_tail(30)
-print(linkedList.remove_head())
-print(linkedList.remove_head())
-# linkedList.add_to_tail(10)
-linkedList.printMe()

@@ -49,9 +49,10 @@ class DoublyLinkedList:
         if not self.head and not self.tail:
             self.head = new_node
             self.tail = new_node
-        new_node.next = self.head
-        self.head.prev = new_node
-        self.head = new_node
+        else:
+            new_node.next = self.head
+            self.head.prev = new_node
+            self.head = new_node
     """
     Removes the List's current head node, making the
     current head's next node the new head of the List.
@@ -66,9 +67,10 @@ class DoublyLinkedList:
             self.head = None
             self.tail = None
             return current_head.value
-        self.head = self.head.next
-        self.head.prev = None
-        return self.head.value            
+        else:
+            self.head = self.head.next
+            self.head.prev = None
+            return self.head.value            
     """
     Wraps the given value in a ListNode and inserts it 
     as the new tail of the list. Don't forget to handle 
@@ -80,9 +82,10 @@ class DoublyLinkedList:
         if not self.tail and not self.head:
             self.head = new_node
             self.tail = new_node
-        self.tail.next = new_node
-        new_node.prev = self.tail
-        self.tail = new_node         
+        else:
+            self.tail.next = new_node
+            new_node.prev = self.tail
+            self.tail = new_node         
     """
     Removes the List's current tail node, making the 
     current tail's previous node the new tail of the List.
@@ -97,10 +100,11 @@ class DoublyLinkedList:
             self.head = None
             self.tail = None
             return current_tail.value
-        current_tail = self.tail
-        self.tail = self.tail.prev
-        self.tail.next = None
-        return current_tail.value            
+        else
+            current_tail = self.tail
+            self.tail = self.tail.prev
+            self.tail.next = None
+            return current_tail.value            
     """
     Removes the input node from its current spot in the 
     List and inserts it as the new head node of the List.
@@ -142,9 +146,9 @@ class DoublyLinkedList:
         elif self.head == node:
             self.remove_from_head()
         else:
-        node.prev.next = node.next
-        node.next.prev = node.prev
-        self.length -= 1
+            node.prev.next = node.next
+            node.next.prev = node.prev
+            self.length -= 1
     """
     Finds and returns the maximum value of all the nodes 
     in the List.
