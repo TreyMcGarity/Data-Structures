@@ -100,7 +100,7 @@ class DoublyLinkedList:
             self.head = None
             self.tail = None
             return current_tail.value
-        else
+        else:
             current_tail = self.tail
             self.tail = self.tail.prev
             self.tail.next = None

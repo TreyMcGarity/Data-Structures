@@ -15,10 +15,10 @@ class Node:
 
 # A Linked List class with a single head node
 class LinkedList:
-    def __init__(self):  
-        self.head = None
-        self.tail = None
-        self.length = 0
+    def __init__(self, node=None):  
+        self.head = node
+        self.tail = node
+        self.length = 1 if node is not None else 0
 
     # insertion method
     def add_to_tail(self, value):
@@ -43,7 +43,7 @@ class LinkedList:
     def remove_head(self):
         self.length -= 1
         if self.head is None and self.tail is None:
-            return None
+            return
         if not self.head.get_next():
             head = self.head
             self.head = None
@@ -83,20 +83,15 @@ class LinkedList:
             prev.next = bye_node.get_next()
 
     def remove_at_index(self, index):
-        self.length -= 1
         if index > self.length:
             return None
-        if self.length == 1 and index == 0:
-            target = self.head
-            self.head = None
-            self.tail = None
-            return target.get_value()
         prev_node = self.head
         for i in range(index - 1):
             prev_node = prev_node.get_next()
         target = prev_node.get_next()
-        prev_node.next = target.get_next()
+        prev_node.next = target.next
         target.next = None
+        self.length -= 1
 
     # print method
     def print_list(self):
