@@ -81,7 +81,6 @@ class BSTNode:
         bst_queue.enqueue(node)
 
         while bst_queue.size > 0:
-            print("size:",bst_queue.size)
             current_node = bst_queue.dequeue()
             print(current_node.value)
             if current_node.left:
