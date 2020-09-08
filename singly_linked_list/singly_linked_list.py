@@ -20,7 +20,7 @@ class LinkedList:
         self.tail = None
         self.length = 0
 
-    # insertion method
+    # insertion methods
     def add_to_tail(self, value):
         new_node = Node(value)
         self.length += 1
@@ -41,7 +41,6 @@ class LinkedList:
 
     # deletion methods
     def remove_head(self):
-        self.length -= 1
         if self.head is None and self.tail is None:
             return None
         if not self.head.get_next():
@@ -52,6 +51,8 @@ class LinkedList:
         value = self.head.get_value()
         self.head = self.head.get_next()
         return value
+        self.length -= 1
+
             
     def remove_tail(self):
         self.length -= 1

@@ -43,7 +43,7 @@ class LinkedList:
     def remove_head(self):
         self.length -= 1
         if self.head is None and self.tail is None:
-            return
+            return None
         if not self.head.get_next():
             head = self.head
             self.head = None
@@ -83,15 +83,20 @@ class LinkedList:
             prev.next = bye_node.get_next()
 
     def remove_at_index(self, index):
+        self.length -= 1
         if index > self.length:
             return None
+        if self.length == 1 and index == 0:
+            target = self.head
+            self.head = None
+            self.tail = None
+            return target.get_value()
         prev_node = self.head
         for i in range(index - 1):
             prev_node = prev_node.get_next()
         target = prev_node.get_next()
-        prev_node.next = target.next
+        prev_node.next = target.get_next()
         target.next = None
-        self.length -= 1
 
     # print method
     def print_list(self):

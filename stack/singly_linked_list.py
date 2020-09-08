@@ -43,7 +43,7 @@ class LinkedList:
     def remove_head(self):
         self.length -= 1
         if self.head is None and self.tail is None:
-            return
+            return None 
         if not self.head.get_next():
             head = self.head
             self.head = None
