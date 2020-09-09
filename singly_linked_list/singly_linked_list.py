@@ -24,11 +24,19 @@ class LinkedList:
     def add_to_tail(self, value):
         new_node = Node(value)
         self.length += 1
-        if self.head is None and self.tail is None:
+        if not self.head:
             self.head = new_node
             self.tail = new_node
-        self.tail.set_next(new_node)
-        self.tail = new_node
+        if self.tail:
+            current = self.tail #10
+            current.set_next(new_node) #20
+            self.tail = new_node 
+        else:
+            current = self.head
+            while current.get_next() is not None:
+                current = current.get_next()
+            current.set_next(new_node)
+        self.tail.set_next(None)
 
     def add_to_head(self, value):
         self.length += 1
@@ -57,7 +65,7 @@ class LinkedList:
     def remove_tail(self):
         self.length -= 1
         if self.head is None and self.tail is None:
-            return
+            return None
         current = self.head
         if self.head == self.tail:
             value = self.head.get_value()
@@ -101,7 +109,18 @@ class LinkedList:
 
     # print method
     def print_list(self):
+        # print(self.tail.value)
         current = self.head
         while(current):
             print(current.value)
             current = current.next
+
+sll = LinkedList()
+sll.add_to_tail(10)
+sll.add_to_tail(20)
+# sll.remove_head()
+# sll.remove_head()
+sll.add_to_tail(30)
+# sll.remove_head()
+sll.print_list()
+# print(sll)
