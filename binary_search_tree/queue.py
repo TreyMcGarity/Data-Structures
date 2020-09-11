@@ -30,5 +30,5 @@ class Queue:
     def dequeue(self):
         if self.size > 0:
             self.size -= 1
-            remove_head = self.storage.remove_head()
-            return remove_head
+            removed_head = self.storage.remove_head()
+            return removed_head

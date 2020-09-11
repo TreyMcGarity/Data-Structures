@@ -33,17 +33,18 @@ class BSTNode:
     # Return True if the tree contains the value
     # False if it does not
     def contains(self, target):
-        if target == self.value:
+        if self.value == target:
             return True
-        elif self.left is None and self.right is None:
-            return False
+        if target < self.value:
+            if self.left is None:
+                return False
+            else:
+                return self.left.contains(target)
         else:
-            if self.left is not None:
-                if self.left.contains(target):
-                    return True
-            if self.right is not None:
-                if self.right.contains(target):
-                    return True
+            if self.right is None:
+                return False
+            else:
+                return self.right.contains(target)
 
     # Return the maximum value found in the tree
     def get_max(self):
@@ -56,7 +57,7 @@ class BSTNode:
     def for_each(self, fn):
         fn(self.value)
         if self.left is None and self.right is None:
-            return
+            return None
         else:
             if self.left is not None:
                 self.left.for_each(fn)
@@ -68,9 +69,9 @@ class BSTNode:
     # Print all the values in order from low to high
     # Hint:  Use a recursive, depth first traversal
     def in_order_print(self):
-        print(self.value)
         if self.left:
             self.left.in_order_print()
+        print(self.value)
         if self.right:
             self.right.in_order_print()
 
@@ -88,7 +89,14 @@ class BSTNode:
             if current_node.right:
                 bst_queue.enqueue(current_node.right)
 
-
+        """
+        Prints exactly the same output as queue does without queue structure:
+        print(self.value)
+        if self.left:
+            self.left.in_order_print()
+        if self.right:
+            self.right.in_order_print()
+        """
 
     # Print the value of every node, starting with the given node,
     # in an iterative depth first traversal
@@ -99,11 +107,10 @@ class BSTNode:
         while bst_stack.size > 0:
             current_node = bst_stack.pop()
             print(current_node.value)
+            if current_node.right: #if check left first will print 1,8,5,7,6,3,2,4
+                bst_stack.push(current_node.right)
             if current_node.left:
                 bst_stack.push(current_node.left)
-            if current_node.right:
-                bst_stack.push(current_node.right)
-
     # Stretch Goals -------------------------
     # Note: Research may be required
 
@@ -128,12 +135,11 @@ bst.insert(3)
 bst.insert(4)
 bst.insert(2)
 
-print("\nbft_print:")
 bst.bft_print(bst)
-print("_______\ndft_print:")
+print("_______")
 bst.dft_print(bst)
 
-print("_______\nelegant methods")
+print("elegant methods")
 print("pre order")
 bst.pre_order_dft()
 print("in order")
